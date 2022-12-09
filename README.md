@@ -1,6 +1,6 @@
-# Ledger Paraswap Plugin
+# Ledger Spool Plugin
 
-This is a plugin for the Ethereum application which helps parsing and displaying relevant information when signing a Paraswap transaction.
+This is a plugin for the Ethereum application which helps parsing and displaying relevant information when signing Spool transactions.
 
 ## Prerequisite
 
@@ -26,16 +26,12 @@ Need more information about the interface, the architecture, or general stuff ab
 
 Smart contracts covered by this plugin are:
 
-| Network | Version | Smart Contract |
-| ---       | --- | --- |
-| Ethereum  | V4  | `0x1bd435f3c054b6e901b7b108a0ab7617c808677b` |
-| Ethereum  | V5  | `0xdef171fe48cf0115b1d80b88dc8eab59176fee57`|
-| BSC       | V4  | `0x55a0e3b6579972055faa983482aceb4b251dcf15`|
-| BSC       | V5  | `0xdef171fe48cf0115b1d80b88dc8eab59176fee57`|
-| Polygon   | V4  | `0x90249ed4d69d70e709ffcd8bee2c5a566f65dade`|
-| Polygon   | V5  | `0xdef171fe48cf0115b1d80b88dc8eab59176fee57`|
-
-
+| Contract Name           |Smart Contract |
+|-------------------------| --- |
+| Vault (various proxies) | `0xa308828904977BbcEb91A9B0cb3dB07636734Fb7` |
+| Controller              | `0xdd4051c3571c143b989c3227e8eb50983974835c`|
+| Staking                 | `0xc3160c5cc63b6116dd182faa8393d3ad9313e213`|
+| Vesting                 | `0x08772c1872c997Fec8dA3c7f36C1FC28EBE72E97`|
 
 
 ## Compilation

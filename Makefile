@@ -29,7 +29,7 @@ APPVERSION_N     = 1
 APPVERSION_P     = 0
 APPVERSION       = $(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)
 
-APPNAME = "Paraswap"
+APPNAME = "Spool"
 
 #prepare hsm generation
 ifeq ($(TARGET_NAME), TARGET_NANOS)
@@ -158,4 +158,4 @@ include $(BOLOS_SDK)/Makefile.rules
 dep/%.d: %.c Makefile
 
 listvariants:
-	@echo VARIANTS NONE paraswap
+	@echo VARIANTS NONE spool

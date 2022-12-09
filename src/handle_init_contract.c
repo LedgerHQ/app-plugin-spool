@@ -1,4 +1,4 @@
-#include "paraswap_plugin.h"
+#include "spool_plugin.h"
 
 // Called once to init.
 void handle_init_contract(void *parameters) {
@@ -12,20 +12,19 @@ void handle_init_contract(void *parameters) {
         return;
     }
 
-    if (msg->pluginContextLength < sizeof(paraswap_parameters_t)) {
-        PRINTF("Paraswap context size too big: expected %d got %d\n",
-               sizeof(paraswap_parameters_t),
+    if (msg->pluginContextLength < sizeof(spool_parameters_t)) {
+        PRINTF("Spool context size too big: expected %d got %d\n",
+               sizeof(spool_parameters_t),
                msg->pluginContextLength);
         msg->result = ETH_PLUGIN_RESULT_ERROR;
         return;
     }
 
-    paraswap_parameters_t *context = (paraswap_parameters_t *) msg->pluginContext;
+    spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
     memset(context, 0, sizeof(*context));
-    context->valid = 1;
 
-    for (uint8_t i = 0; i < NUM_PARASWAP_SELECTORS; i++) {
-        if (memcmp((uint8_t *) PIC(PARASWAP_SELECTORS[i]), msg->selector, SELECTOR_SIZE) == 0) {
+    for (uint8_t i = 0; i < NUM_SPOOL_SELECTORS; i++) {
+        if (memcmp((uint8_t *) PIC(SPOOL_SELECTORS[i]), msg->selector, SELECTOR_SIZE) == 0) {
             context->selectorIndex = i;
             break;
         }
@@ -33,39 +32,26 @@ void handle_init_contract(void *parameters) {
 
     // Set `next_param` to be the first field we expect to parse.
     switch (context->selectorIndex) {
-        case BUY_ON_UNI_FORK:
-        case SWAP_ON_UNI_FORK:
-        case BUY_ON_UNI:
-        case SWAP_ON_UNI:
-        case SWAP_ON_UNI_V4:
-        case SWAP_ON_UNI_FORK_V4:
-        case BUY_ON_UNI_V4:
-        case BUY_ON_UNI_FORK_V4:
-            if (context->selectorIndex == SWAP_ON_UNI_FORK ||
-                context->selectorIndex == BUY_ON_UNI_FORK ||
-                context->selectorIndex == SWAP_ON_UNI_FORK_V4 ||
-                context->selectorIndex == BUY_ON_UNI_FORK_V4) {
-                context->skip =
-                    2;  // Skip the first two parameters (factory and initCode) for uni forks.
-            }
+        case SPOOL_CREATE_VAULT:
+        case SPOOL_CLAIM:
+        case SPOOL_STAKING_REWARDS:
+        case SPOOL_CLAIM_VESTING:
+        case SPOOL_COMPOUND:
+            context->next_param = NONE;
+            break;
+        case SPOOL_WITHDRAW:
+        case SPOOL_WITHDRAW_FAST:
+        case SPOOL_CONTROLLER_REWARDS:
+        case SPOOL_GET_REWARDS:
+        case SPOOL_DEPOSIT:
+            context->next_param = PATHS_OFFSET;
+            break;
+        case SPOOL_STAKE:
+        case SPOOL_UNSTAKE:
             context->next_param = AMOUNT_SENT;
             break;
-        case SWAP_ON_ZERO_V4:
-        case SWAP_ON_ZERO_V2:
-        case SWAP_ON_UNI_V2_FORK:
-            context->next_param = TOKEN_SENT;
-            break;
-        case MEGA_SWAP:
-        case BUY:
-        case MULTI_SWAP:
-        case SIMPLE_BUY:
-        case SIMPLE_SWAP:
-        case SIMPLE_SWAP_V4:
-        case MULTI_SWAP_V4:
-        case MEGA_SWAP_V4:
-            context->next_param = TOKEN_SENT;
-            if (context->selectorIndex != SIMPLE_SWAP_V4)
-                context->skip = 1;  // Skipping 0x20 (offset of structure)
+        case SPOOL_ADD_TOKEN:
+            context->next_param = ADDRESS;
             break;
         default:
             PRINTF("Missing selectorIndex\n");

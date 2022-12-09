@@ -14,7 +14,7 @@ cd ..
 echo "*Building elfs for Nano S..."
 export BOLOS_SDK="$NANOS_SDK"
 
-echo "**Building app-paraswap for Nano S..."
+echo "**Building app-spool for Nano S..."
 make clean
 make -j DEBUG=1
 cp bin/app.elf "tests/elfs/plugin_nanos.elf"
@@ -30,7 +30,7 @@ cp "${APP_ETHEREUM}/bin/app.elf" "tests/elfs/ethereum_nanos.elf"
 echo "*Building elfs for Nano X..."
 export BOLOS_SDK="$NANOX_SDK"
 
-echo "**Building app-paraswap for Nano X..."
+echo "**Building app-spool for Nano X..."
 make clean
 make -j DEBUG=1
 cp bin/app.elf "tests/elfs/plugin_nanox.elf"
@@ -41,5 +41,20 @@ make clean
 make -j DEBUG=1 CHAIN=ethereum BYPASS_SIGNATURES=1 ALLOW_DATA=1
 cd - || exit
 cp "${APP_ETHEREUM}/bin/app.elf" "tests/elfs/ethereum_nanox.elf"
+
+echo "*Building elfs for Nano SP..."
+export BOLOS_SDK="$NANOSP_SDK"
+
+echo "**Building app-spool for Nano SP..."
+make clean
+make -j DEBUG=1
+cp bin/app.elf "tests/elfs/plugin_nanosp.elf"
+
+echo "**Building app-ethereum for Nano SP..."
+cd $APP_ETHEREUM || exit
+make clean
+make -j DEBUG=1 CHAIN=ethereum BYPASS_SIGNATURES=1 ALLOW_DATA=1
+cd - || exit
+cp "${APP_ETHEREUM}/bin/app.elf" "tests/elfs/ethereum_nanosp.elf"
 
 echo "done"
