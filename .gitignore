@@ -22,3 +22,8 @@ __pycache__/
 tests/node_modules
 tests/lib
 tests/snapshots-tmp
+
+../.DS_Store
+.DS_Store
+elfs/
+snapshots/.DS_Store
