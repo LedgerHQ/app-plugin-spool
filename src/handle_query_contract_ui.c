@@ -68,13 +68,8 @@ static void set_compound_ui(ethQueryContractUI_t *msg,
 static void set_fast_withdraw_ui(ethQueryContractUI_t *msg,
                            const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Fast withdraw", msg->titleLength);
+    strlcpy(msg->msg, "Withdrawing . . .", msg->msgLength);
 
-    amountToString(context->amount_sent,
-                   sizeof(context->amount_sent),
-                   18,
-                   "Shares ",
-                   msg->msg,
-                   msg->msgLength);
 }
 
 static void set_stake_ui(ethQueryContractUI_t *msg,

@@ -5,8 +5,6 @@ void handle_finalize(void *parameters) {
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
     switch(context -> selectorIndex) {
         case SPOOL_CREATE_VAULT:
-        case SPOOL_WITHDRAW:
-        case SPOOL_WITHDRAW_FAST:
         case SPOOL_STAKE:
         case SPOOL_UNSTAKE:
             msg->numScreens = 1;
@@ -19,6 +17,8 @@ void handle_finalize(void *parameters) {
         case SPOOL_CONTROLLER_REWARDS:
         case SPOOL_GET_REWARDS:
         case SPOOL_STAKING_REWARDS:
+        case SPOOL_WITHDRAW:
+        case SPOOL_WITHDRAW_FAST:
         case SPOOL_CLAIM_VESTING:
         case SPOOL_COMPOUND:
             msg->numScreens = 0;
