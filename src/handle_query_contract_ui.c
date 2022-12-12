@@ -39,8 +39,8 @@ static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) 
 // Set UI for "Warning" screen.
 static void set_warning_ui(ethQueryContractUI_t *msg,
                            const spool_parameters_t *context __attribute__((unused))) {
-    strlcpy(msg->title, "SENDING STABLE", msg->titleLength);
-    strlcpy(msg->msg, "USDT / DAI / USDC", msg->msgLength);
+    strlcpy(msg->title, "DEPOSITING FUNDS", msg->titleLength);
+    strlcpy(msg->msg, "", msg->msgLength);
 }
 
 
