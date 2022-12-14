@@ -1,0 +1,38 @@
+{
+  "id": "spool",
+  "name": "Spool",
+  "url": "https://dapp-browser.apps.ledger.com",
+  "params": {
+    "dappUrl": "https://www.app.spool.fi/",
+    "nanoApp": "Spool",
+    "dappName": "Spool",
+    "networks": [
+      {
+        "currency": "ethereum",
+        "chainID": 1,
+        "nodeURL": "TODO our eth node"
+      }
+    ]
+  },
+  "homepageUrl": "https://www.spool.fi/",
+  "icon": "TODO",
+  "platform": "all",
+  "apiVersion": "0.0.1",
+  "manifestVersion": "1",
+  "branch": "stable",
+  "categories": [
+    "staking",
+    "defi"
+  ],
+  "currencies": ["dai", "usdc", "usdt"],
+  "content": {
+    "shortDescription": {
+      "en": "Spool is a benevolent entity that ensures the growth and wellbeing of DeFi as a whole."
+    },
+    "description": {
+      "en": "Spool is the simplest way to discover, access, and combine the best options in this vast space to make sure all liquidity goes wherever it is most aligned with its owner’s personal terms."
+    }
+  },
+  "permissions": [],
+  "domains": ["https://*"]
+}
