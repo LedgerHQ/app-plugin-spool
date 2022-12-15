@@ -33,9 +33,9 @@ APPNAME = "Spool"
 
 #prepare hsm generation
 ifeq ($(TARGET_NAME), TARGET_NANOS)
-ICONNAME=icons/nanos_app_paraswap.gif
+ICONNAME=icons/nanos_app_spool.gif
 else
-ICONNAME=icons/nanox_app_paraswap.gif
+ICONNAME=icons/nanox_app_spool.gif
 endif
 
 ################
