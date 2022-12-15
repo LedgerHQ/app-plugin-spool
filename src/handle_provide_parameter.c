@@ -12,9 +12,6 @@ static void handle_transaction(ethPluginProvideParameter_t *msg, spool_parameter
              context->offset = U2BE(msg->parameter, PARAMETER_LENGTH - sizeof(context->offset));
              context->next_param = AMOUNT_SENT;
              break;
-        case PATHS_LEN:
-             context->next_param = TOKEN_SENT;
-             break;
         case AMOUNT_SENT:
              handle_amount_sent(msg, context);
              context->next_param = NONE;

@@ -25,13 +25,6 @@
 
 #include "spool_plugin.h"
 
-
-// ERC20 Approve to approve vaults
-// Function: approve(address usr, uint256 wad)
-// MethodID: 0x095ea7b3
-static const uint8_t SPOOL_APPROVE_SELECTOR[SELECTOR_SIZE] = {0x09, 0x5e, 0xa7, 0xb3};
-
-
 // VAULT METHODS
 
 // Function: deposit(address[] vaultStrategies,uint128 amount,bool transferFromVault)
@@ -71,7 +64,6 @@ static const uint8_t SPOOL_CREATE_VAULT_SELECTOR[SELECTOR_SIZE] = {0xc4, 0x8e, 0
 static const uint8_t SPOOL_CONTROLLER_REWARDS_SELECTOR[SELECTOR_SIZE] = {0x51, 0x0c, 0xcb, 0x43};
 
 
-
 // STAKING METHODS
 
 // Function: stake(uint256 amount)
@@ -89,7 +81,6 @@ static const uint8_t SPOOL_STAKING_REWARDS_SELECTOR[SELECTOR_SIZE] = {0xf4, 0xde
 // Function: compound(bool doCompoundVoSpoolRewards)
 // MethodID: 0xd1e6044a
 static const uint8_t SPOOL_COMPOUND_SELECTOR[SELECTOR_SIZE] = {0xd1, 0xe6, 0x04, 0x4a};
-
 
 
 // VESTING
@@ -114,8 +105,7 @@ const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS] = {
     SPOOL_STAKING_REWARDS_SELECTOR,
     SPOOL_COMPOUND_SELECTOR,
     SPOOL_CLAIM_VESTING_SELECTOR,
-    SPOOL_ADD_TOKEN_SELECTOR,
-    SPOOL_APPROVE_SELECTOR
+    SPOOL_ADD_TOKEN_SELECTOR
     };
 
 void spool_plugin_call(int message, void *parameters) {

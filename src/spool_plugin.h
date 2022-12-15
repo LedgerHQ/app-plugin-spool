@@ -9,12 +9,9 @@
 
 #define RUN_APPLICATION 1
 
-#define NUM_SPOOL_SELECTORS 14
+#define NUM_SPOOL_SELECTORS 13
 
 #define PLUGIN_NAME "Spool"
-
-#define TOKEN_SENT_FOUND     1
-#define TOKEN_RECEIVED_FOUND 1 << 1
 
 typedef enum {
     SPOOL_DEPOSIT,
@@ -37,11 +34,8 @@ extern const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS];
 
 typedef enum {
     PATHS_OFFSET,
-    PATHS_LEN,
     AMOUNT_SENT,
-    TOKEN_SENT,
     ADDRESS,
-    ALLOWANCE,
     NONE,
 } parameter;
 
