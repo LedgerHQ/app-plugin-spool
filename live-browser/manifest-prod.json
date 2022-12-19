@@ -15,7 +15,7 @@
     ]
   },
   "homepageUrl": "https://www.spool.fi/",
-  "icon": "TODO",
+  "icon": "ledger_live.gif",
   "platform": "all",
   "apiVersion": "0.0.1",
   "manifestVersion": "1",

@@ -27,7 +27,6 @@ typedef enum {
     SPOOL_COMPOUND,
     SPOOL_CLAIM_VESTING,
     SPOOL_ADD_TOKEN,
-    SPOOL_APPROVE
 } spoolSelector_t;
 
 extern const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS];
