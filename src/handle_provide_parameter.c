@@ -9,15 +9,15 @@ static void handle_amount_sent(const ethPluginProvideParameter_t *msg,
 static void handle_transaction(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
     switch (context->next_param) {
         case PATHS_OFFSET:
-             context->offset = U2BE(msg->parameter, PARAMETER_LENGTH - sizeof(context->offset));
-             context->next_param = AMOUNT_SENT;
-             break;
+            context->offset = U2BE(msg->parameter, PARAMETER_LENGTH - sizeof(context->offset));
+            context->next_param = AMOUNT_SENT;
+            break;
         case AMOUNT_SENT:
-             handle_amount_sent(msg, context);
-             context->next_param = NONE;
-             break;
+            handle_amount_sent(msg, context);
+            context->next_param = NONE;
+            break;
         case NONE:
-             break;
+            break;
         default:
             PRINTF("Param not supported: %d\n", context->next_param);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
@@ -28,11 +28,11 @@ static void handle_transaction(ethPluginProvideParameter_t *msg, spool_parameter
 static void handle_get_rewards(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
     switch (context->next_param) {
         case PATHS_OFFSET:  // vault strategies
-             context->offset = U2BE(msg->parameter, PARAMETER_LENGTH - sizeof(context->offset));
-             context->next_param = NONE;
-             break;
+            context->offset = U2BE(msg->parameter, PARAMETER_LENGTH - sizeof(context->offset));
+            context->next_param = NONE;
+            break;
         case NONE:
-             break;
+            break;
         default:
             PRINTF("Param not supported: %d\n", context->next_param);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
@@ -43,22 +43,21 @@ static void handle_get_rewards(ethPluginProvideParameter_t *msg, spool_parameter
 static void handle_add_token(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
     switch (context->next_param) {
         case ADDRESS:
-             copy_address(context->token_address, msg->parameter, sizeof(context->token_address));
-             context->next_param = NONE;
+            copy_address(context->token_address, msg->parameter, sizeof(context->token_address));
+            context->next_param = NONE;
         case AMOUNT_SENT:
-             handle_amount_sent(msg, context);
-             context->next_param = NONE;
-             break;
+            handle_amount_sent(msg, context);
+            context->next_param = NONE;
+            break;
         case NONE:
             context->next_param = AMOUNT_SENT;
-             break;
+            break;
         default:
             PRINTF("Param not supported: %d\n", context->next_param);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
             break;
     }
 }
-
 
 void handle_provide_parameter(void *parameters) {
     ethPluginProvideParameter_t *msg = (ethPluginProvideParameter_t *) parameters;
@@ -91,5 +90,4 @@ void handle_provide_parameter(void *parameters) {
             msg->result = ETH_PLUGIN_RESULT_ERROR;
             break;
     }
-
 }

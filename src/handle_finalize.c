@@ -3,7 +3,7 @@
 void handle_finalize(void *parameters) {
     ethPluginFinalize_t *msg = (ethPluginFinalize_t *) parameters;
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
-    switch(context -> selectorIndex) {
+    switch (context->selectorIndex) {
         case SPOOL_CREATE_VAULT:
         case SPOOL_STAKE:
         case SPOOL_UNSTAKE:
@@ -28,5 +28,4 @@ void handle_finalize(void *parameters) {
     msg->tokenLookup2 = NULL;
     msg->uiType = ETH_UI_TYPE_GENERIC;
     msg->result = ETH_PLUGIN_RESULT_OK;
-
 }
