@@ -39,8 +39,8 @@ static const uint8_t SPOOL_CLAIM_SELECTOR[SELECTOR_SIZE] = {0x08, 0x4f, 0xd9, 0x
 // MethodID: 0x510ccb43
 static const uint8_t SPOOL_GET_REWARDS_SELECTOR[SELECTOR_SIZE] = {0x51, 0x0c, 0xcb, 0x43};
 
-// Function: withdrawFast(address[] vaultStrategies,uint128 sharesToWithdraw,bool withdrawAll,tuple fastWithdrawParams)
-// MethodID: 0xd7b9d423
+// Function: withdrawFast(address[] vaultStrategies,uint128 sharesToWithdraw,bool withdrawAll,tuple
+// fastWithdrawParams) MethodID: 0xd7b9d423
 static const uint8_t SPOOL_WITHDRAW_FAST_SELECTOR[SELECTOR_SIZE] = {0xd7, 0xb9, 0xd4, 0x23};
 
 // Function: withdraw(address[] vaultStrategies,uint128 sharesToWithdraw,bool withdrawAll)
@@ -51,8 +51,6 @@ static const uint8_t SPOOL_WITHDRAW_SELECTOR[SELECTOR_SIZE] = {0xfd, 0x3c, 0x11,
 // MethodID: 0x73c2ad9c
 static const uint8_t SPOOL_ADD_TOKEN_SELECTOR[SELECTOR_SIZE] = {0x73, 0xc2, 0xad, 0x9c};
 
-
-
 // CONTROLLER METHODS
 
 // Function: createVault(tuple details)
@@ -62,7 +60,6 @@ static const uint8_t SPOOL_CREATE_VAULT_SELECTOR[SELECTOR_SIZE] = {0xc4, 0x8e, 0
 // Function: getRewards(address[] vaults)
 // MethodID: 0x510ccb43
 static const uint8_t SPOOL_CONTROLLER_REWARDS_SELECTOR[SELECTOR_SIZE] = {0x51, 0x0c, 0xcb, 0x43};
-
 
 // STAKING METHODS
 
@@ -82,31 +79,26 @@ static const uint8_t SPOOL_STAKING_REWARDS_SELECTOR[SELECTOR_SIZE] = {0xf4, 0xde
 // MethodID: 0xd1e6044a
 static const uint8_t SPOOL_COMPOUND_SELECTOR[SELECTOR_SIZE] = {0xd1, 0xe6, 0x04, 0x4a};
 
-
 // VESTING
 
 // Function: claim()
 // MethodID: 0x4e71d92d
 static const uint8_t SPOOL_CLAIM_VESTING_SELECTOR[SELECTOR_SIZE] = {0x4e, 0x71, 0xd9, 0x2d};
 
-
-
 // Array of all the different spool selectors.
-const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS] = {
-    SPOOL_DEPOSIT_SELECTOR,
-    SPOOL_CLAIM_SELECTOR,
-    SPOOL_GET_REWARDS_SELECTOR,
-    SPOOL_WITHDRAW_FAST_SELECTOR,
-    SPOOL_WITHDRAW_SELECTOR,
-    SPOOL_CREATE_VAULT_SELECTOR,
-    SPOOL_CONTROLLER_REWARDS_SELECTOR,
-    SPOOL_STAKE_SELECTOR,
-    SPOOL_UNSTAKE_SELECTOR,
-    SPOOL_STAKING_REWARDS_SELECTOR,
-    SPOOL_COMPOUND_SELECTOR,
-    SPOOL_CLAIM_VESTING_SELECTOR,
-    SPOOL_ADD_TOKEN_SELECTOR
-    };
+const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS] = {SPOOL_DEPOSIT_SELECTOR,
+                                                             SPOOL_CLAIM_SELECTOR,
+                                                             SPOOL_GET_REWARDS_SELECTOR,
+                                                             SPOOL_WITHDRAW_FAST_SELECTOR,
+                                                             SPOOL_WITHDRAW_SELECTOR,
+                                                             SPOOL_CREATE_VAULT_SELECTOR,
+                                                             SPOOL_CONTROLLER_REWARDS_SELECTOR,
+                                                             SPOOL_STAKE_SELECTOR,
+                                                             SPOOL_UNSTAKE_SELECTOR,
+                                                             SPOOL_STAKING_REWARDS_SELECTOR,
+                                                             SPOOL_COMPOUND_SELECTOR,
+                                                             SPOOL_CLAIM_VESTING_SELECTOR,
+                                                             SPOOL_ADD_TOKEN_SELECTOR};
 
 void spool_plugin_call(int message, void *parameters) {
     switch (message) {

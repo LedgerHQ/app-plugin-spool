@@ -3,8 +3,8 @@
 static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) {
     switch (context->selectorIndex) {
         case SPOOL_DEPOSIT:
-             strlcpy(msg->title, "Deposit to vault", msg->titleLength);
-             break;
+            strlcpy(msg->title, "Deposit to vault", msg->titleLength);
+            break;
         default:
             PRINTF("Unhandled selector Index: %d\n", context->selectorIndex);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
@@ -13,7 +13,7 @@ static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) 
 
     // Checks decimal places of token based on number length
     bool isBig = false;
-    for (int i = 0 ; i < INT256_LENGTH; i++) {
+    for (int i = 0; i < INT256_LENGTH; i++) {
         if (i < 24 && context->amount_sent[i] > 0) {
             isBig = true;
         }
@@ -33,7 +33,7 @@ static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) 
                        "USDT/C ",
                        msg->msg,
                        msg->msgLength);
-        }
+    }
 }
 
 // Set UI for "Warning" screen.
@@ -43,37 +43,32 @@ static void set_warning_ui(ethQueryContractUI_t *msg,
     strlcpy(msg->msg, "", msg->msgLength);
 }
 
-
 static void set_create_spool_ui(ethQueryContractUI_t *msg,
-                           const spool_parameters_t *context __attribute__((unused))) {
+                                const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Spool", msg->titleLength);
     strlcpy(msg->msg, "Creating . . .", msg->msgLength);
 }
 
-
 static void set_claim_ui(ethQueryContractUI_t *msg,
-                           const spool_parameters_t *context __attribute__((unused))) {
+                         const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Spool", msg->titleLength);
     strlcpy(msg->msg, "Claiming . . .", msg->msgLength);
 }
 
-
 static void set_compound_ui(ethQueryContractUI_t *msg,
-                           const spool_parameters_t *context __attribute__((unused))) {
+                            const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Spool", msg->titleLength);
     strlcpy(msg->msg, "Compounding . . .", msg->msgLength);
 }
 
-
 static void set_fast_withdraw_ui(ethQueryContractUI_t *msg,
-                           const spool_parameters_t *context __attribute__((unused))) {
+                                 const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Fast withdraw", msg->titleLength);
     strlcpy(msg->msg, "Withdrawing . . .", msg->msgLength);
-
 }
 
 static void set_stake_ui(ethQueryContractUI_t *msg,
-                           const spool_parameters_t *context __attribute__((unused))) {
+                         const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Staking", msg->titleLength);
 
     amountToString(context->amount_sent,
@@ -96,7 +91,7 @@ static void set_unstake_ui(ethQueryContractUI_t *msg,
 }
 
 static void set_add_token_ui(ethQueryContractUI_t *msg,
-                           const spool_parameters_t *context __attribute__((unused))) {
+                             const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Reward token:", msg->titleLength);
 
     if (context->token_found) {
@@ -120,7 +115,7 @@ static void set_add_token_ui(ethQueryContractUI_t *msg,
 }
 
 static void set_added_token_amount_ui(ethQueryContractUI_t *msg,
-                           const spool_parameters_t *context __attribute__((unused))) {
+                                      const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Reward amount:", msg->titleLength);
     uint8_t decimals = context->decimals;
     const char *ticker = context->ticker;
@@ -141,8 +136,6 @@ static void set_added_token_amount_ui(ethQueryContractUI_t *msg,
     }
 }
 
-
-
 void handle_query_contract_ui(void *parameters) {
     ethQueryContractUI_t *msg = (ethQueryContractUI_t *) parameters;
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
@@ -153,53 +146,53 @@ void handle_query_contract_ui(void *parameters) {
     uint8_t index = msg->screenIndex;
 
     switch (index) {
-            case 0:
-                switch(context -> selectorIndex) {
-                    case SPOOL_DEPOSIT:
-                        set_warning_ui(msg, context);
-                        break;
-                    case SPOOL_CLAIM:
-                    case SPOOL_CONTROLLER_REWARDS:
-                    case SPOOL_GET_REWARDS:
-                    case SPOOL_CLAIM_VESTING:
-                    case SPOOL_STAKING_REWARDS:
-                        set_claim_ui(msg, context);
-                        break;
-                    case SPOOL_WITHDRAW:
-                    case SPOOL_WITHDRAW_FAST:
-                        set_fast_withdraw_ui(msg, context);
-                        break;
-                    case SPOOL_CREATE_VAULT:
-                        set_create_spool_ui(msg, context);
-                        break;
-                    case SPOOL_STAKE:
-                        set_stake_ui(msg, context);
-                        break;
-                    case SPOOL_UNSTAKE:
-                        set_unstake_ui(msg, context);
-                        break;
-                    case SPOOL_COMPOUND:
-                        set_compound_ui(msg, context);
-                        break;
-                    case SPOOL_ADD_TOKEN:
-                        set_add_token_ui(msg, context);
-                        break;
-                }
-                break;
-            case 1:
-                switch(context -> selectorIndex) {
-                    case SPOOL_DEPOSIT:
-                        set_send_ui(msg, context);
-                        break;
-                    case SPOOL_ADD_TOKEN:
-                        set_added_token_amount_ui(msg, context);
-                        break;
-                }
+        case 0:
+            switch (context->selectorIndex) {
+                case SPOOL_DEPOSIT:
+                    set_warning_ui(msg, context);
+                    break;
+                case SPOOL_CLAIM:
+                case SPOOL_CONTROLLER_REWARDS:
+                case SPOOL_GET_REWARDS:
+                case SPOOL_CLAIM_VESTING:
+                case SPOOL_STAKING_REWARDS:
+                    set_claim_ui(msg, context);
+                    break;
+                case SPOOL_WITHDRAW:
+                case SPOOL_WITHDRAW_FAST:
+                    set_fast_withdraw_ui(msg, context);
+                    break;
+                case SPOOL_CREATE_VAULT:
+                    set_create_spool_ui(msg, context);
+                    break;
+                case SPOOL_STAKE:
+                    set_stake_ui(msg, context);
+                    break;
+                case SPOOL_UNSTAKE:
+                    set_unstake_ui(msg, context);
+                    break;
+                case SPOOL_COMPOUND:
+                    set_compound_ui(msg, context);
+                    break;
+                case SPOOL_ADD_TOKEN:
+                    set_add_token_ui(msg, context);
+                    break;
+            }
+            break;
+        case 1:
+            switch (context->selectorIndex) {
+                case SPOOL_DEPOSIT:
+                    set_send_ui(msg, context);
+                    break;
+                case SPOOL_ADD_TOKEN:
+                    set_added_token_amount_ui(msg, context);
+                    break;
+            }
 
-                break;
-            default:
-               PRINTF("Received an invalid screenIndex\n");
-               msg->result = ETH_PLUGIN_RESULT_ERROR;
-               return;
-        }
+            break;
+        default:
+            PRINTF("Received an invalid screenIndex\n");
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
+            return;
+    }
 }
