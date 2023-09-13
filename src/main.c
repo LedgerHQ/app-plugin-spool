@@ -17,7 +17,6 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <string.h>
 #include <math.h>
 #include "os.h"
 #include "cx.h"
