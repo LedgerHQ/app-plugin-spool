@@ -54,7 +54,7 @@ typedef struct spool_parameters_t {
     uint8_t token_found;
     uint8_t decimals;
     char ticker[MAX_TICKER_LEN];
-    char message[MAX_TICKER_LEN]; // V2 (vault name etc)
+    char message[MAX_TICKER_LEN];  // V2 (vault name etc)
 
     // For parsing data.
     uint8_t next_param;  // Set to be the next param we expect to parse.

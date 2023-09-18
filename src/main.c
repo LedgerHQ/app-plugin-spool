@@ -91,7 +91,6 @@
 // MethodID: 0x6fc3f5d5
 // static const uint8_t SPOOL_V2_DEPLOY_VAULT_SELECTOR[SELECTOR_SIZE] = {0x6f, 0xc3, 0xf5, 0xd5};
 
-
 static const uint32_t SPOOL_DEPOSIT_SELECTOR = 0x8ab936b8;
 static const uint32_t SPOOL_CLAIM_SELECTOR = 0x084fd9b4;
 static const uint32_t SPOOL_GET_REWARDS_SELECTOR = 0x510ccb43;

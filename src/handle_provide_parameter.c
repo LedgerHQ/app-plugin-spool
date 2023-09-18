@@ -75,7 +75,7 @@ void handle_provide_parameter(void *parameters) {
         case SPOOL_COMPOUND:
         case SPOOL_CLAIM_VESTING:
         case SPOOL_DEPOSIT:
-        case SPOOL_V2_DEPLOY_VAULT:         // V2
+        case SPOOL_V2_DEPLOY_VAULT:  // V2
             handle_transaction(msg, context);
             break;
         case SPOOL_GET_REWARDS:

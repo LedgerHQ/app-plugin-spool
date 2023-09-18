@@ -10,12 +10,11 @@ static int find_selector(uint32_t selector, const uint32_t *selectors, size_t n,
     return -1;
 }
 
-
 // Called once to init.
 void handle_init_contract(void *parameters) {
     // Cast the msg to the type of structure we expect (here, ethPluginInitContract_t).
     ethPluginInitContract_t *msg = (ethPluginInitContract_t *) parameters;
-     PRINTF("HANDLING INIT CONTRACT\n\n\n");
+    PRINTF("HANDLING INIT CONTRACT\n\n\n");
     // Make sure we are running a compatible version.
     if (msg->interfaceVersion != ETH_PLUGIN_INTERFACE_VERSION_LATEST) {
         PRINTF("Wrong interface version: expected %d got %d\n",
@@ -42,13 +41,11 @@ void handle_init_contract(void *parameters) {
 
     uint32_t selector = U4BE(msg->selector, 0);
     if (find_selector(selector, SPOOL_SELECTORS, NUM_SPOOL_SELECTORS, &context->selectorIndex)) {
-        PRINTF("GOT SELECTOR: %d",
-                       context->selectorIndex);
+        PRINTF("GOT SELECTOR: %d", context->selectorIndex);
         msg->result = ETH_PLUGIN_RESULT_UNAVAILABLE;
         return;
     }
-    PRINTF("GOT SELECTOR: %d",
-                       context->selectorIndex);
+    PRINTF("GOT SELECTOR: %d", context->selectorIndex);
     // Set `next_param` to be the first field we expect to parse.
     switch (context->selectorIndex) {
         case SPOOL_CREATE_VAULT:
@@ -56,7 +53,7 @@ void handle_init_contract(void *parameters) {
         case SPOOL_STAKING_REWARDS:
         case SPOOL_CLAIM_VESTING:
         case SPOOL_COMPOUND:
-        case SPOOL_V2_DEPLOY_VAULT:         // V2
+        case SPOOL_V2_DEPLOY_VAULT:  // V2
             context->next_param = NONE;
             break;
         case SPOOL_WITHDRAW:
