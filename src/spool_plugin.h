@@ -10,7 +10,7 @@
 #define RUN_APPLICATION 1
 
 // Number of selectors defined in this plugin. Should match the enum `selector_t`.
-#define NUM_SPOOL_SELECTORS 13
+#define NUM_SPOOL_SELECTORS 14
 
 // Name of the plugin.
 #define PLUGIN_NAME "Spool"
@@ -18,20 +18,21 @@
 // Enumeration of the different selectors possible.
 // Should follow the exact same order as the array declared in main.c
 typedef enum {
-    SPOOL_DEPOSIT,
-    SPOOL_CLAIM,
-    SPOOL_GET_REWARDS,
-    SPOOL_WITHDRAW_FAST,
-    SPOOL_WITHDRAW,
-    SPOOL_CREATE_VAULT,
-    SPOOL_CONTROLLER_REWARDS,
-    SPOOL_STAKE,
-    SPOOL_UNSTAKE,
-    SPOOL_STAKING_REWARDS,
-    SPOOL_COMPOUND,
-    SPOOL_CLAIM_VESTING,
-    SPOOL_ADD_TOKEN,
-} spoolSelector_t;
+    SPOOL_DEPOSIT = 0,
+    SPOOL_CLAIM = 1,
+    SPOOL_GET_REWARDS = 2,
+    SPOOL_WITHDRAW_FAST = 3,
+    SPOOL_WITHDRAW = 4,
+    SPOOL_CREATE_VAULT = 5,
+    SPOOL_CONTROLLER_REWARDS = 6,
+    SPOOL_STAKE = 7,
+    SPOOL_UNSTAKE = 8,
+    SPOOL_STAKING_REWARDS = 9,
+    SPOOL_COMPOUND = 10,
+    SPOOL_CLAIM_VESTING = 11,
+    SPOOL_ADD_TOKEN = 12,
+    SPOOL_V2_DEPLOY_VAULT = 13
+} selector_t;
 
 // Enumeration used to parse the smart contract data.
 typedef enum {
@@ -53,6 +54,7 @@ typedef struct spool_parameters_t {
     uint8_t token_found;
     uint8_t decimals;
     char ticker[MAX_TICKER_LEN];
+    char message[MAX_TICKER_LEN]; // V2 (vault name etc)
 
     // For parsing data.
     uint8_t next_param;  // Set to be the next param we expect to parse.
@@ -66,7 +68,7 @@ typedef struct spool_parameters_t {
 
 // Piece of code that will check that the above structure is not bigger than 5 * 32. Do not remove
 // this check.
-_Static_assert(sizeof(context_t) <= 5 * 32, "Structure of parameters too big.");
+_Static_assert(sizeof(spool_parameters_t) <= 5 * 32, "Structure of parameters too big.");
 
 void handle_init_contract(void *parameters);
 void handle_provide_parameter(void *parameters);

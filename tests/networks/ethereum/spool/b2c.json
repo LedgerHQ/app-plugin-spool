@@ -2,6 +2,18 @@
     "chainId": 1,
     "contracts": [
         {
+          "address": "0x8049fc710d4a1deea6a6bcef772c166ced7a82f5",
+          "contractName": "SmartVaultFactory",
+          "selectors": {
+            "0x6fc3f5d5": {
+              "erc20OfInterest": [
+              ],
+              "method": "deploySmartVault",
+              "plugin": "Spool"
+            }
+          }
+        },
+        {
           "address": "0x08f4b84852cdfacbb2082913a1caeb90afe5357a",
           "contractName": "Vault1",
           "selectors": {

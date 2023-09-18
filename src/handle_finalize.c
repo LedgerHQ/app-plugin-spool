@@ -5,6 +5,7 @@ void handle_finalize(void *parameters) {
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
     switch (context->selectorIndex) {
         case SPOOL_CREATE_VAULT:
+        case SPOOL_V2_DEPLOY_VAULT:
         case SPOOL_STAKE:
         case SPOOL_UNSTAKE:
             msg->numScreens = 1;

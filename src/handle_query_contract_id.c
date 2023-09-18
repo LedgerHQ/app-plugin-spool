@@ -23,6 +23,7 @@ void handle_query_contract_id(void *parameters) {
             strlcpy(msg->version, "Withdraw", msg->versionLength);
             break;
         case SPOOL_CREATE_VAULT:
+        case SPOOL_V2_DEPLOY_VAULT:
             strlcpy(msg->version, "Creating spool", msg->versionLength);
             break;
         case SPOOL_STAKE:

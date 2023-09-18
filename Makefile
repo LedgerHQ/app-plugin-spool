@@ -27,19 +27,17 @@ include $(BOLOS_SDK)/Makefile.defines
 # Application name
 APPNAME = "Spool"
 
-APPVERSION_M     = 1
-APPVERSION_N     = 0
-APPVERSION_P     = 0
-APPVERSION       = $(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)
-
-APPNAME = "Spool"
+# Application version
+APPVERSION_M = 1
+APPVERSION_N = 0
+APPVERSION_P = 0
+APPVERSION = "$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)"
 
 # Initialize plugin SDK submodule if needed
 ifneq ($(shell git submodule status | grep '^[-+]'),)
 $(info INFO: Need to reinitialize git submodules)
 $(shell git submodule update --init)
 endif
-
 
 ifeq ($(ETHEREUM_PLUGIN_SDK),)
 ETHEREUM_PLUGIN_SDK=ethereum-plugin-sdk

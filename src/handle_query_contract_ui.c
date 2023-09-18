@@ -163,6 +163,7 @@ void handle_query_contract_ui(void *parameters) {
                     set_fast_withdraw_ui(msg, context);
                     break;
                 case SPOOL_CREATE_VAULT:
+                case SPOOL_V2_DEPLOY_VAULT:
                     set_create_spool_ui(msg, context);
                     break;
                 case SPOOL_STAKE:
