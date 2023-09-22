@@ -2,7 +2,7 @@
 // https://jestjs.io/docs/en/configuration.html
 
 module.exports = {
-  modulePaths: ["<rootDir>/src/eth/v2", "<rootDir>/tests/src/eth/v2"],
+  modulePaths: ["<rootDir>/src", "<rootDir>/tests"],
 
   moduleNameMapper: {
     "^jest$": "<rootDir>/jest.js",
