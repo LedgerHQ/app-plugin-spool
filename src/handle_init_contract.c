@@ -41,13 +41,11 @@ void handle_init_contract(void *parameters) {
 
     uint32_t selector = U4BE(msg->selector, 0);
     if (find_selector(selector, SPOOL_SELECTORS, NUM_SPOOL_SELECTORS, &context->selectorIndex)) {
-        PRINTF("GOT SELECTOR: %d",
-                       context->selectorIndex);
+        PRINTF("GOT SELECTOR: %d", context->selectorIndex);
         msg->result = ETH_PLUGIN_RESULT_UNAVAILABLE;
         return;
     }
-    PRINTF("GOT SELECTOR: %d",
-                       context->selectorIndex);
+    PRINTF("GOT SELECTOR: %d", context->selectorIndex);
     // Set `next_param` to be the first field we expect to parse.
     switch (context->selectorIndex) {
         case SPOOL_CREATE_VAULT:
