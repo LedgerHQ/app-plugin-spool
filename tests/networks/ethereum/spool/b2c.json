@@ -1,6 +1,75 @@
 {
     "chainId": 1,
     "contracts": [
+      {
+        "address": "0xd8d2c1c3c7982272e3e12dec5af681433fdcf003",
+        "contractName": "RewardManager",
+        "selectors": {
+            "0x2aba2aeb": {
+                "erc20OfInterest": [
+                  "path.1"
+                ],
+                "method": "addToken",
+                "plugin": "Spool"
+            },
+            "0xfb7e92ea" : {
+              "erc20OfInterest": [
+              ],
+              "method": "claim",
+              "plugin": "Spool"
+            },
+            "0xb02029e0": {
+              "erc20OfInterest": [
+              ],
+              "method": "extendRewardEmission",
+              "plugin": "Spool"
+            }
+          }
+
+      },
+      {
+        "address": "0x5f63195445f9949ff2f88c48e3566e4dc156c5d7",
+        "contractName": "SmartVaultManager",
+        "selectors": {
+          "0xf8a70486": {
+            "erc20OfInterest": [
+            ],
+            "method": "claimWithdrawal",
+            "plugin": "Spool"
+          },
+          "0x388bbfd3": {
+            "erc20OfInterest": [
+            ],
+            "method": "redeem",
+            "plugin": "Spool"
+          },
+          "0xe1c2eea6": {
+            "erc20OfInterest": [
+            ],
+            "method": "redeemFast",
+            "plugin": "Spool"
+          },
+          "0xfa15b91b": {
+            "erc20OfInterest": [
+            ],
+            "method": "deposit",
+            "plugin": "Spool"
+          }
+        }
+      },
+      {
+        "address": "0x20df904668a6e0aa374015af47b1911f417b7c8d",
+        "contractName": "DepositSwapper",
+        "selectors": {
+          "0xd99d32e3": {
+            "erc20OfInterest": [
+
+            ],
+            "method": "swapAndDeposit",
+            "plugin": "Spool"
+          }
+        }
+      },
         {
           "address": "0x8049fc710d4a1deea6a6bcef772c166ced7a82f5",
           "contractName": "SmartVaultFactory",

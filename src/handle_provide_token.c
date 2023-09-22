@@ -3,7 +3,7 @@
 void handle_provide_token(void *parameters) {
     ethPluginProvideInfo_t *msg = (ethPluginProvideInfo_t *) parameters;
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
-
+    PRINTF("IN PROVIDE TOKEN: %d\n", msg->item1);
     if (msg->item1) {
         // The Ethereum App found the information for the requested token!
         // Store its decimals.
@@ -24,6 +24,8 @@ void handle_provide_token(void *parameters) {
         // like so:
         // msg->additionalScreens = 1;
     }
+
+    PRINTF("PROVIDE TOKEN RESULT: %d\n", context->token_found);
 
     msg->result = ETH_PLUGIN_RESULT_OK;
 }

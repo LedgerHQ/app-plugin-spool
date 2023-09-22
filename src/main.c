@@ -105,7 +105,17 @@ static const uint32_t SPOOL_UNSTAKE_SELECTOR = 0x2e17de78;
 static const uint32_t SPOOL_STAKING_REWARDS_SELECTOR = 0xf4de10ac;
 static const uint32_t SPOOL_COMPOUND_SELECTOR = 0xd1e6044a;
 static const uint32_t SPOOL_CLAIM_VESTING_SELECTOR = 0x4e71d92d;
+
 static const uint32_t SPOOL_V2_DEPLOY_VAULT_SELECTOR = 0x6fc3f5d5;
+static const uint32_t SPOOL_V2_ADD_TOKEN_SELECTOR = 0x2aba2aeb;
+static const uint32_t SPOOL_V2_CLAIM_WITHDRAWAL_SELECTOR = 0xf8a70486;
+static const uint32_t SPOOL_V2_SWAP_AND_DEPOSIT_SELECTOR = 0xd99d32e3;
+static const uint32_t SPOOL_V2_REDEEM_FAST_SELECTOR = 0xe1c2eea6;
+static const uint32_t SPOOL_V2_REDEEM_SELECTOR = 0x388bbfd3;
+static const uint32_t SPOOL_V2_DEPOSIT_SELECTOR = 0xfa15b91b;
+static const uint32_t SPOOL_V2_CLAIM_REWARD_SELECTOR = 0xfb7e92ea;
+static const uint32_t SPOOL_V2_EXTEND_REWARD_SELECTOR = 0xb02029e0;
+
 // Array of all the different spool selectors.
 const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS] = {SPOOL_DEPOSIT_SELECTOR,
                                                              SPOOL_CLAIM_SELECTOR,
@@ -120,7 +130,15 @@ const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS] = {SPOOL_DEPOSIT_SELEC
                                                              SPOOL_COMPOUND_SELECTOR,
                                                              SPOOL_CLAIM_VESTING_SELECTOR,
                                                              SPOOL_ADD_TOKEN_SELECTOR,
-                                                             SPOOL_V2_DEPLOY_VAULT_SELECTOR};
+                                                             SPOOL_V2_DEPLOY_VAULT_SELECTOR,
+                                                             SPOOL_V2_ADD_TOKEN_SELECTOR,
+                                                             SPOOL_V2_CLAIM_WITHDRAWAL_SELECTOR,
+                                                             SPOOL_V2_SWAP_AND_DEPOSIT_SELECTOR,
+                                                             SPOOL_V2_REDEEM_FAST_SELECTOR,
+                                                             SPOOL_V2_REDEEM_SELECTOR,
+                                                             SPOOL_V2_DEPOSIT_SELECTOR,
+                                                             SPOOL_V2_CLAIM_REWARD_SELECTOR,
+                                                             SPOOL_V2_EXTEND_REWARD_SELECTOR};
 
 void spool_plugin_call(int message, void *parameters) {
     switch (message) {

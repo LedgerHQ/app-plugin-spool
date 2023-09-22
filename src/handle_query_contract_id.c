@@ -8,12 +8,14 @@ void handle_query_contract_id(void *parameters) {
 
     switch (context->selectorIndex) {
         case SPOOL_DEPOSIT:
+        case SPOOL_V2_DEPOSIT:
             strlcpy(msg->version, "Deposit", msg->versionLength);
             break;
         case SPOOL_CLAIM:
         case SPOOL_CONTROLLER_REWARDS:
         case SPOOL_STAKING_REWARDS:
         case SPOOL_GET_REWARDS:
+        case SPOOL_V2_CLAIM_REWARD:
             strlcpy(msg->version, "Claim Rewards", msg->versionLength);
             break;
         case SPOOL_WITHDRAW_FAST:
@@ -40,6 +42,28 @@ void handle_query_contract_id(void *parameters) {
             break;
         case SPOOL_ADD_TOKEN:
             strlcpy(msg->version, "Add reward token", msg->versionLength);
+            break;
+        case SPOOL_V2_REDEEM_FAST:
+            strlcpy(msg->version, "Fast redeem", msg->versionLength);
+            break;
+        case SPOOL_V2_REDEEM:
+            strlcpy(msg->version, "Redeem", msg->versionLength);
+            break;
+        case SPOOL_V2_CLAIM_WITHDRAWAL:
+            strlcpy(msg->version, "Claim withdrawal", msg->versionLength);
+            break;
+        case SPOOL_V2_ADD_TOKEN:
+            strlcpy(msg->version, "Add incentive", msg->versionLength);
+            break;
+        case SPOOL_V2_EXTEND_REWARD:
+            strlcpy(msg->version, "Extend reward", msg->versionLength);
+            break;
+        case SPOOL_V2_SWAP_AND_DEPOSIT:
+            strlcpy(msg->version, "Swap and deposit", msg->versionLength);
+            break;
+        default:
+            PRINTF("Unhandled selectorIndex %d\n", context->selectorIndex);
+            strlcpy(msg->version, "Error, no selector", msg->versionLength);
             break;
     }
 

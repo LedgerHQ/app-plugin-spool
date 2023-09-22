@@ -15,7 +15,6 @@ static int find_selector(uint32_t selector, const uint32_t *selectors, size_t n,
 void handle_init_contract(void *parameters) {
     // Cast the msg to the type of structure we expect (here, ethPluginInitContract_t).
     ethPluginInitContract_t *msg = (ethPluginInitContract_t *) parameters;
-     PRINTF("HANDLING INIT CONTRACT\n\n\n");
     // Make sure we are running a compatible version.
     if (msg->interfaceVersion != ETH_PLUGIN_INTERFACE_VERSION_LATEST) {
         PRINTF("Wrong interface version: expected %d got %d\n",
@@ -57,12 +56,13 @@ void handle_init_contract(void *parameters) {
         case SPOOL_CLAIM_VESTING:
         case SPOOL_COMPOUND:
         case SPOOL_V2_DEPLOY_VAULT:         // V2
-            context->next_param = NONE;
+            context->next_param = END;
             break;
         case SPOOL_WITHDRAW:
         case SPOOL_WITHDRAW_FAST:
         case SPOOL_CONTROLLER_REWARDS:
         case SPOOL_GET_REWARDS:
+        case SPOOL_V2_CLAIM_REWARD:
         case SPOOL_DEPOSIT:
             context->next_param = PATHS_OFFSET;
             break;
@@ -72,6 +72,21 @@ void handle_init_contract(void *parameters) {
             break;
         case SPOOL_ADD_TOKEN:
             context->next_param = ADDRESS;
+            break;
+        case SPOOL_V2_ADD_TOKEN:
+        case SPOOL_V2_EXTEND_REWARD:
+        case SPOOL_V2_CLAIM_WITHDRAWAL:
+            context->next_param = VAULT_ADDRESS;
+            break;
+        case SPOOL_V2_DEPOSIT:
+        case SPOOL_V2_REDEEM:
+        case SPOOL_V2_REDEEM_FAST:
+            context->skip_counter = 0;
+            context->next_param = SKIP;
+            break;
+        case SPOOL_V2_SWAP_AND_DEPOSIT:
+            context->skip_counter = 3;
+            context->next_param = SKIP;
             break;
         default:
             PRINTF("Missing selectorIndex\n");

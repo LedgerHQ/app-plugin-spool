@@ -149,10 +149,13 @@ async function processTransaction(eth, sim, steps, label, rawTxHex,srlTx="") {
  * @param {string} contractName Name of the contract
  * @param {string} testLabel Name of the test case
  * @param {string} testDirSuffix Name of the folder suffix for snapshot comparison
+ * @param testDirPreffix v1 / v2
  * @param {string} rawTxHex RawTx Hex to test
  * @param {boolean} signed The plugin is already signed and existing in Ledger database
+ * @param serializedTx
+ * @param testNetwork
  */
-function processTest(device, contractName, testLabel, testDirSuffix, rawTxHex, signed, serializedTx, testNetwork="ethereum" ) {
+function processTest(device, contractName, testLabel, testDirSuffix, testDirPreffix, rawTxHex, signed, serializedTx, testNetwork="ethereum" ) {
   test(
     "[" + contractName + "] - " + device.label + " - " + testLabel,
     zemu(device.name, async (sim, eth) => {
@@ -160,7 +163,7 @@ function processTest(device, contractName, testLabel, testDirSuffix, rawTxHex, s
         eth,
         sim,
         device.steps,
-        testNetwork+ "_" + device.name + "_" + testDirSuffix,
+          testDirPreffix + "/" + testNetwork+ "_" + device.name + "_" + testDirSuffix,
         rawTxHex,
         serializedTx
       );

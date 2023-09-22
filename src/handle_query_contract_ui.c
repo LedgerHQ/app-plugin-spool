@@ -37,7 +37,7 @@ static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) 
 }
 
 // Set UI for "Warning" screen.
-static void set_warning_ui(ethQueryContractUI_t *msg,
+static void set_deposit_ui(ethQueryContractUI_t *msg,
                            const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "DEPOSITING FUNDS", msg->titleLength);
     strlcpy(msg->msg, "", msg->msgLength);
@@ -136,6 +136,56 @@ static void set_added_token_amount_ui(ethQueryContractUI_t *msg,
     }
 }
 
+static void set_reward_end_time(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
+    PRINTF("set_reward_end_time\n");
+    strlcpy(msg->title, "End time:", msg->titleLength);
+    amountToString(context->end_timestamp,
+                   sizeof(context->end_timestamp),
+                   0,
+                   "Timestamp: ",
+                   msg->msg,
+                   msg->msgLength);
+}
+
+static void set_vault_ui(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
+    strlcpy(msg->title, "Vault:", msg->titleLength);
+    msg->msg[0] = '0';
+    msg->msg[1] = 'x';
+    // We need a random chainID for legacy reasons with `getEthAddressStringFromBinary`.
+    // Setting it to `0` will make it work with every chainID :)
+    uint64_t chainid = 0;
+    getEthAddressStringFromBinary(
+                    context->vault_address,
+                    msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
+                    msg->pluginSharedRW->sha3,
+                    chainid);
+}
+
+static void set_beneficiary_ui(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
+    strlcpy(msg->title, "Receiver:", msg->titleLength);
+    msg->msg[0] = '0';
+    msg->msg[1] = 'x';
+    // We need a random chainID for legacy reasons with `getEthAddressStringFromBinary`.
+    // Setting it to `0` will make it work with every chainID :)
+    uint64_t chainid = 0;
+    getEthAddressStringFromBinary(
+                    context->beneficiary,
+                    msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
+                    msg->pluginSharedRW->sha3,
+                    chainid);
+}
+
+static void set_shares_ui(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
+     strlcpy(msg->title, "Shares:", msg->titleLength);
+     amountToString(context->amount_sent,
+                    sizeof(context->amount_sent),
+                    18,
+                    "Amount: ",
+                    msg->msg,
+                    msg->msgLength);
+
+}
+
 void handle_query_contract_ui(void *parameters) {
     ethQueryContractUI_t *msg = (ethQueryContractUI_t *) parameters;
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
@@ -149,11 +199,12 @@ void handle_query_contract_ui(void *parameters) {
         case 0:
             switch (context->selectorIndex) {
                 case SPOOL_DEPOSIT:
-                    set_warning_ui(msg, context);
+                    set_deposit_ui(msg, context);
                     break;
                 case SPOOL_CLAIM:
                 case SPOOL_CONTROLLER_REWARDS:
                 case SPOOL_GET_REWARDS:
+                case SPOOL_V2_CLAIM_REWARD:
                 case SPOOL_CLAIM_VESTING:
                 case SPOOL_STAKING_REWARDS:
                     set_claim_ui(msg, context);
@@ -176,7 +227,16 @@ void handle_query_contract_ui(void *parameters) {
                     set_compound_ui(msg, context);
                     break;
                 case SPOOL_ADD_TOKEN:
+                case SPOOL_V2_ADD_TOKEN:
+                case SPOOL_V2_EXTEND_REWARD:
                     set_add_token_ui(msg, context);
+                    break;
+                case SPOOL_V2_REDEEM_FAST:
+                case SPOOL_V2_REDEEM:
+                case SPOOL_V2_DEPOSIT:
+                case SPOOL_V2_CLAIM_WITHDRAWAL:
+                case SPOOL_V2_SWAP_AND_DEPOSIT:
+                    set_vault_ui(msg, context);
                     break;
             }
             break;
@@ -186,11 +246,37 @@ void handle_query_contract_ui(void *parameters) {
                     set_send_ui(msg, context);
                     break;
                 case SPOOL_ADD_TOKEN:
+                case SPOOL_V2_ADD_TOKEN:
+                case SPOOL_V2_EXTEND_REWARD:
                     set_added_token_amount_ui(msg, context);
                     break;
+                case SPOOL_V2_REDEEM_FAST:
+                case SPOOL_V2_REDEEM:
+                    set_shares_ui(msg, context);
+                    break;
+                case SPOOL_V2_CLAIM_WITHDRAWAL:
+                case SPOOL_V2_SWAP_AND_DEPOSIT:
+                case SPOOL_V2_DEPOSIT:
+                    set_beneficiary_ui(msg, context);
+                    break;
             }
-
             break;
+        case 2:
+            switch(context->selectorIndex) {
+                case SPOOL_V2_ADD_TOKEN:
+                case SPOOL_V2_EXTEND_REWARD:
+                    set_vault_ui(msg, context);
+                    break;
+            }
+            break;
+        case 3:
+           switch(context->selectorIndex) {
+               case SPOOL_V2_ADD_TOKEN:
+               case SPOOL_V2_EXTEND_REWARD:
+                   set_reward_end_time(msg, context);
+                   break;
+           }
+           break;
         default:
             PRINTF("Received an invalid screenIndex\n");
             msg->result = ETH_PLUGIN_RESULT_ERROR;

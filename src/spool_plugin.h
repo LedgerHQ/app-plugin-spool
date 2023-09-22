@@ -10,7 +10,7 @@
 #define RUN_APPLICATION 1
 
 // Number of selectors defined in this plugin. Should match the enum `selector_t`.
-#define NUM_SPOOL_SELECTORS 14
+#define NUM_SPOOL_SELECTORS 22
 
 // Name of the plugin.
 #define PLUGIN_NAME "Spool"
@@ -31,7 +31,15 @@ typedef enum {
     SPOOL_COMPOUND = 10,
     SPOOL_CLAIM_VESTING = 11,
     SPOOL_ADD_TOKEN = 12,
-    SPOOL_V2_DEPLOY_VAULT = 13
+    SPOOL_V2_DEPLOY_VAULT = 13,
+    SPOOL_V2_ADD_TOKEN = 14,
+    SPOOL_V2_CLAIM_WITHDRAWAL = 15,
+    SPOOL_V2_SWAP_AND_DEPOSIT = 16,
+    SPOOL_V2_REDEEM_FAST = 17,
+    SPOOL_V2_REDEEM = 18,
+    SPOOL_V2_DEPOSIT = 19,
+    SPOOL_V2_CLAIM_REWARD = 20,
+    SPOOL_V2_EXTEND_REWARD = 21
 } selector_t;
 
 // Enumeration used to parse the smart contract data.
@@ -39,7 +47,13 @@ typedef enum {
     PATHS_OFFSET,
     AMOUNT_SENT,
     ADDRESS,
+    BENEFICIARY,
+    NFT_IDS,
+    VAULT_ADDRESS,
+    END_TIMESTAMP,
+    SKIP,
     NONE,
+    END
 } parameter;
 
 extern const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS];
@@ -50,6 +64,11 @@ typedef struct spool_parameters_t {
     uint8_t amount_sent[INT256_LENGTH];
     uint8_t token_address[ADDRESS_LENGTH];
 
+    // transaction parsing v2
+    uint8_t vault_address[ADDRESS_LENGTH];
+    uint8_t end_timestamp[INT256_LENGTH];
+    uint8_t beneficiary[ADDRESS_LENGTH];
+
     // token querying
     uint8_t token_found;
     uint8_t decimals;
@@ -58,6 +77,7 @@ typedef struct spool_parameters_t {
 
     // For parsing data.
     uint8_t next_param;  // Set to be the next param we expect to parse.
+    uint8_t skip_counter; // Number of parameters to skip.
     uint16_t offset;     // Offset at which the array or struct starts.
     bool go_to_offset;   // If set, will force the parsing to iterate through parameters until
                          // `offset` is reached.
