@@ -78,8 +78,11 @@ void handle_init_contract(void *parameters) {
             break;
         case SPOOL_V2_DEPOSIT:
         case SPOOL_V2_REDEEM:
-        case SPOOL_V2_REDEEM_FAST:
             context->skip_counter = 0;
+            context->next_param = SKIP;
+            break;
+        case SPOOL_V2_REDEEM_FAST:
+            context->skip_counter = 1;
             context->next_param = SKIP;
             break;
         case SPOOL_V2_SWAP_AND_DEPOSIT:
