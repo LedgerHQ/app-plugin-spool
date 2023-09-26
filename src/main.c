@@ -116,7 +116,7 @@ static const uint32_t SPOOL_V2_CLAIM_REWARD_SELECTOR = 0xfb7e92ea;
 static const uint32_t SPOOL_V2_EXTEND_REWARD_SELECTOR = 0xb02029e0;
 
 // Array of all the different spool selectors.
-const uint32_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS] = {SPOOL_DEPOSIT_SELECTOR,
+const uint32_t SPOOL_SELECTORS[NUM_SPOOL_SELECTORS] = {SPOOL_DEPOSIT_SELECTOR,
                                                              SPOOL_CLAIM_SELECTOR,
                                                              SPOOL_GET_REWARDS_SELECTOR,
                                                              SPOOL_WITHDRAW_FAST_SELECTOR,
