@@ -24,6 +24,7 @@ void handle_finalize(void *parameters) {
         case SPOOL_WITHDRAW:
         case SPOOL_WITHDRAW_FAST:
         case SPOOL_CLAIM_VESTING:
+        case SPOOL_V2_CLAIM_REWARD:
         case SPOOL_COMPOUND:
             msg->numScreens = 0;
             break;

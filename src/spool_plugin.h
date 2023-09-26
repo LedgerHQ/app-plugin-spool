@@ -56,7 +56,7 @@ typedef enum {
     END
 } parameter;
 
-extern const uint8_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS];
+extern const uint32_t *const SPOOL_SELECTORS[NUM_SPOOL_SELECTORS];
 
 // Shared global memory with Ethereum app. Must be at most 5 * 32 bytes.
 typedef struct spool_parameters_t {

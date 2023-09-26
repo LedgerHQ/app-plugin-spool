@@ -195,6 +195,10 @@ static void handle_add_reward_token(ethPluginProvideParameter_t *msg, spool_para
                 case SPOOL_V2_EXTEND_REWARD:
                     context->next_param = AMOUNT_SENT;
                     break;
+                default:
+                    PRINTF("Param not supported in add reward: %d\n", context->next_param);
+                    msg->result = ETH_PLUGIN_RESULT_ERROR;
+                    break;
             }
             break;
         case VAULT_ADDRESS:
@@ -210,6 +214,10 @@ static void handle_add_reward_token(ethPluginProvideParameter_t *msg, spool_para
                 case SPOOL_V2_EXTEND_REWARD:
                     context->next_param = NONE;
                     break;
+                default:
+                    PRINTF("Param not supported in add reward: %d\n", context->next_param);
+                    msg->result = ETH_PLUGIN_RESULT_ERROR;
+                    break;
             }
             break;
         case AMOUNT_SENT:
@@ -220,6 +228,10 @@ static void handle_add_reward_token(ethPluginProvideParameter_t *msg, spool_para
                     break;
                 case SPOOL_V2_EXTEND_REWARD:
                     context->next_param = END_TIMESTAMP;
+                    break;
+                default:
+                    PRINTF("Param not supported in add reward: %d\n", context->next_param);
+                    msg->result = ETH_PLUGIN_RESULT_ERROR;
                     break;
             }
             break;
