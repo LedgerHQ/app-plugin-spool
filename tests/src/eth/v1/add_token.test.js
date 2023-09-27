@@ -25,5 +25,5 @@ const devices = [
 ];
 
 devices.forEach((device) =>
-  processTest(device, contractName, testLabel, testDirSuffix, testDirPreffix, testDirPreffix, rawTxHex, signedPlugin,"",testNetwork)
+  processTest(device, contractName, testLabel, testDirSuffix, testDirPreffix, rawTxHex, signedPlugin,"",testNetwork)
 );
