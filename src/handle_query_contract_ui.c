@@ -136,7 +136,8 @@ static void set_added_token_amount_ui(ethQueryContractUI_t *msg,
     }
 }
 
-static void set_reward_end_time(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
+static void set_reward_end_time(ethQueryContractUI_t *msg,
+                                const spool_parameters_t *context __attribute__((unused))) {
     PRINTF("set_reward_end_time\n");
     strlcpy(msg->title, "End time:", msg->titleLength);
     amountToString(context->end_timestamp,
@@ -147,7 +148,8 @@ static void set_reward_end_time(ethQueryContractUI_t *msg, const spool_parameter
                    msg->msgLength);
 }
 
-static void set_vault_ui(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
+static void set_vault_ui(ethQueryContractUI_t *msg,
+                         const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Vault:", msg->titleLength);
     msg->msg[0] = '0';
     msg->msg[1] = 'x';
@@ -155,13 +157,14 @@ static void set_vault_ui(ethQueryContractUI_t *msg, const spool_parameters_t *co
     // Setting it to `0` will make it work with every chainID :)
     uint64_t chainid = 0;
     getEthAddressStringFromBinary(
-                    context->vault_address,
-                    msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-                    msg->pluginSharedRW->sha3,
-                    chainid);
+        context->vault_address,
+        msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
+        msg->pluginSharedRW->sha3,
+        chainid);
 }
 
-static void set_beneficiary_ui(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
+static void set_beneficiary_ui(ethQueryContractUI_t *msg,
+                               const spool_parameters_t *context __attribute__((unused))) {
     strlcpy(msg->title, "Receiver:", msg->titleLength);
     msg->msg[0] = '0';
     msg->msg[1] = 'x';
@@ -169,21 +172,21 @@ static void set_beneficiary_ui(ethQueryContractUI_t *msg, const spool_parameters
     // Setting it to `0` will make it work with every chainID :)
     uint64_t chainid = 0;
     getEthAddressStringFromBinary(
-                    context->beneficiary,
-                    msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-                    msg->pluginSharedRW->sha3,
-                    chainid);
+        context->beneficiary,
+        msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
+        msg->pluginSharedRW->sha3,
+        chainid);
 }
 
-static void set_shares_ui(ethQueryContractUI_t *msg, const spool_parameters_t *context __attribute__((unused))) {
-     strlcpy(msg->title, "Shares:", msg->titleLength);
-     amountToString(context->amount_sent,
-                    sizeof(context->amount_sent),
-                    18,
-                    "Amount: ",
-                    msg->msg,
-                    msg->msgLength);
-
+static void set_shares_ui(ethQueryContractUI_t *msg,
+                          const spool_parameters_t *context __attribute__((unused))) {
+    strlcpy(msg->title, "Shares:", msg->titleLength);
+    amountToString(context->amount_sent,
+                   sizeof(context->amount_sent),
+                   18,
+                   "Amount: ",
+                   msg->msg,
+                   msg->msgLength);
 }
 
 void handle_query_contract_ui(void *parameters) {
@@ -262,7 +265,7 @@ void handle_query_contract_ui(void *parameters) {
             }
             break;
         case 2:
-            switch(context->selectorIndex) {
+            switch (context->selectorIndex) {
                 case SPOOL_V2_ADD_TOKEN:
                 case SPOOL_V2_EXTEND_REWARD:
                     set_vault_ui(msg, context);
@@ -270,13 +273,13 @@ void handle_query_contract_ui(void *parameters) {
             }
             break;
         case 3:
-           switch(context->selectorIndex) {
-               case SPOOL_V2_ADD_TOKEN:
-               case SPOOL_V2_EXTEND_REWARD:
-                   set_reward_end_time(msg, context);
-                   break;
-           }
-           break;
+            switch (context->selectorIndex) {
+                case SPOOL_V2_ADD_TOKEN:
+                case SPOOL_V2_EXTEND_REWARD:
+                    set_reward_end_time(msg, context);
+                    break;
+            }
+            break;
         default:
             PRINTF("Received an invalid screenIndex\n");
             msg->result = ETH_PLUGIN_RESULT_ERROR;

@@ -28,7 +28,7 @@ void handle_finalize(void *parameters) {
         case SPOOL_COMPOUND:
             msg->numScreens = 0;
             break;
-//             v2
+            //             v2
         case SPOOL_V2_REDEEM_FAST:
         case SPOOL_V2_REDEEM:
         case SPOOL_V2_DEPOSIT:
