@@ -10,7 +10,6 @@ static int find_selector(uint32_t selector, const uint32_t *selectors, size_t n,
     return -1;
 }
 
-
 // Called once to init.
 void handle_init_contract(void *parameters) {
     // Cast the msg to the type of structure we expect (here, ethPluginInitContract_t).
@@ -53,7 +52,7 @@ void handle_init_contract(void *parameters) {
         case SPOOL_STAKING_REWARDS:
         case SPOOL_CLAIM_VESTING:
         case SPOOL_COMPOUND:
-        case SPOOL_V2_DEPLOY_VAULT:         // V2
+        case SPOOL_V2_DEPLOY_VAULT:  // V2
             context->next_param = END;
             break;
         case SPOOL_WITHDRAW:

@@ -64,12 +64,12 @@ static void handle_add_token(ethPluginProvideParameter_t *msg, spool_parameters_
 static void handle_redeem(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
     switch (context->next_param) {
         case SKIP:
-             if (context->skip_counter > 0) {
-                 context->skip_counter--;
-                 break; // exit early since we're skipping
-             }
-             context->next_param = BENEFICIARY;
-             break;
+            if (context->skip_counter > 0) {
+                context->skip_counter--;
+                break;  // exit early since we're skipping
+            }
+            context->next_param = BENEFICIARY;
+            break;
         case ADDRESS:
             copy_address(context->vault_address, msg->parameter, sizeof(context->vault_address));
             context->next_param = AMOUNT_SENT;
@@ -97,12 +97,12 @@ static void handle_redeem(ethPluginProvideParameter_t *msg, spool_parameters_t *
 static void handle_redeem_fast(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
     switch (context->next_param) {
         case SKIP:
-             if (context->skip_counter > 0) {
-                 context->skip_counter--;
-                 break; // exit early since we're skipping
-             }
-             context->next_param = ADDRESS;
-             break;
+            if (context->skip_counter > 0) {
+                context->skip_counter--;
+                break;  // exit early since we're skipping
+            }
+            context->next_param = ADDRESS;
+            break;
         case ADDRESS:
             copy_address(context->vault_address, msg->parameter, sizeof(context->vault_address));
             context->next_param = AMOUNT_SENT;
@@ -132,31 +132,31 @@ static void handle_redeem_fast(ethPluginProvideParameter_t *msg, spool_parameter
 
 static void handle_deposit(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
     switch (context->next_param) {
-            case SKIP:
-                 if (context->skip_counter > 0) {
-                     context->skip_counter--;
-                     break; // exit early since we're skipping
-                 }
-                 context->next_param = ADDRESS;
-                 break;
-            case ADDRESS:
-                copy_address(context->vault_address, msg->parameter, sizeof(context->vault_address));
-                context->next_param = PATHS_OFFSET;
-                break;
-            case PATHS_OFFSET:
-                context->next_param = BENEFICIARY;
-                break;
-            case BENEFICIARY:
-                copy_address(context->beneficiary, msg->parameter, sizeof(context->beneficiary));
-                context->next_param = END;
-                break;
-            case END:
-                break;
-            default:
-                PRINTF("Param not supported: %d\n", context->next_param);
-                msg->result = ETH_PLUGIN_RESULT_ERROR;
-                break;
-        }
+        case SKIP:
+            if (context->skip_counter > 0) {
+                context->skip_counter--;
+                break;  // exit early since we're skipping
+            }
+            context->next_param = ADDRESS;
+            break;
+        case ADDRESS:
+            copy_address(context->vault_address, msg->parameter, sizeof(context->vault_address));
+            context->next_param = PATHS_OFFSET;
+            break;
+        case PATHS_OFFSET:
+            context->next_param = BENEFICIARY;
+            break;
+        case BENEFICIARY:
+            copy_address(context->beneficiary, msg->parameter, sizeof(context->beneficiary));
+            context->next_param = END;
+            break;
+        case END:
+            break;
+        default:
+            PRINTF("Param not supported: %d\n", context->next_param);
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
+            break;
+    }
 }
 
 static void handle_claim_withdraw(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
@@ -246,32 +246,31 @@ static void handle_add_reward_token(ethPluginProvideParameter_t *msg, spool_para
 
 static void handle_swap_and_deposit(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
     switch (context->next_param) {
-            case SKIP:
-                if (context->skip_counter > 0) {
-                    context->skip_counter--;
-                    break; // exit early since we're skipping
-                }
-                context->next_param = VAULT_ADDRESS;
-                break;
-            case VAULT_ADDRESS:
-                copy_address(context->vault_address, msg->parameter, sizeof(context->vault_address));
-                context->next_param = BENEFICIARY;
-                break;
-            case BENEFICIARY:
-                copy_address(context->beneficiary, msg->parameter, sizeof(context->beneficiary));
-                context->next_param = END;
-                break;
-            case END:
-                break;
-            default:
-                PRINTF("Param not supported: %d\n", context->next_param);
-                msg->result = ETH_PLUGIN_RESULT_ERROR;
-                break;
-        }
+        case SKIP:
+            if (context->skip_counter > 0) {
+                context->skip_counter--;
+                break;  // exit early since we're skipping
+            }
+            context->next_param = VAULT_ADDRESS;
+            break;
+        case VAULT_ADDRESS:
+            copy_address(context->vault_address, msg->parameter, sizeof(context->vault_address));
+            context->next_param = BENEFICIARY;
+            break;
+        case BENEFICIARY:
+            copy_address(context->beneficiary, msg->parameter, sizeof(context->beneficiary));
+            context->next_param = END;
+            break;
+        case END:
+            break;
+        default:
+            PRINTF("Param not supported: %d\n", context->next_param);
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
+            break;
+    }
 }
 
 static void handle_claim_reward(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
-
 }
 
 void handle_provide_parameter(void *parameters) {
