@@ -15,6 +15,9 @@
 // Name of the plugin.
 #define PLUGIN_NAME "Spool"
 
+#define BIG_DECIMALS 18
+#define SMALL_DECIMALS 6
+
 // Enumeration of the different selectors possible.
 // Should follow the exact same order as the array declared in main.c
 typedef enum {
