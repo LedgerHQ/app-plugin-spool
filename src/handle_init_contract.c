@@ -1,5 +1,4 @@
 #include "spool_plugin.h"
-#include <string.h>
 
 static int find_selector(uint32_t selector, const uint32_t *selectors, size_t n, selector_t *out) {
     if (out == NULL || selectors == NULL){
@@ -41,7 +40,7 @@ void handle_init_contract(void *parameters) {
 
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
     // Initialize the context (to 0).
-    memset_s(context, 0, sizeof(*context));
+    memset(context, 0, sizeof(*context));
 
     uint32_t selector = U4BE(msg->selector, 0);
     if (find_selector(selector, SPOOL_SELECTORS, NUM_SPOOL_SELECTORS, &context->selectorIndex)) {

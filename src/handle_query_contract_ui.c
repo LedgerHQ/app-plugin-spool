@@ -1,5 +1,4 @@
 #include "spool_plugin.h"
-#include <string.h>
 // Set UI for the "Send" screen.
 static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) {
     switch (context->selectorIndex) {
@@ -194,8 +193,8 @@ void handle_query_contract_ui(void *parameters) {
     ethQueryContractUI_t *msg = (ethQueryContractUI_t *) parameters;
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
 
-    memset_s(msg->title, 0, msg->titleLength);
-    memset_s(msg->msg, 0, msg->msgLength);
+    memset(msg->title, 0, msg->titleLength);
+    memset(msg->msg, 0, msg->msgLength);
     msg->result = ETH_PLUGIN_RESULT_OK;
     uint8_t index = msg->screenIndex;
 
