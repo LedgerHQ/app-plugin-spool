@@ -22,14 +22,14 @@ static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) 
     if (isBig) {
         amountToString(context->amount_sent,
                        sizeof(context->amount_sent),
-                       18,
+                       BIG_DECIMALS,
                        "DAI ",
                        msg->msg,
                        msg->msgLength);
     } else {
         amountToString(context->amount_sent,
                        sizeof(context->amount_sent),
-                       6,
+                       SMALL_DECIMALS,
                        "USDT/C ",
                        msg->msg,
                        msg->msgLength);
@@ -73,7 +73,7 @@ static void set_stake_ui(ethQueryContractUI_t *msg,
 
     amountToString(context->amount_sent,
                    sizeof(context->amount_sent),
-                   18,
+                   BIG_DECIMALS,
                    "Amount ",
                    msg->msg,
                    msg->msgLength);
@@ -84,7 +84,7 @@ static void set_unstake_ui(ethQueryContractUI_t *msg,
     strlcpy(msg->title, "Unstaking", msg->titleLength);
     amountToString(context->amount_sent,
                    sizeof(context->amount_sent),
-                   18,
+                   BIG_DECIMALS,
                    "Amount ",
                    msg->msg,
                    msg->msgLength);
@@ -129,7 +129,7 @@ static void set_added_token_amount_ui(ethQueryContractUI_t *msg,
     } else {
         amountToString(context->amount_sent,
                        sizeof(context->amount_sent),
-                       18,
+                       BIG_DECIMALS,
                        "Amount: ",
                        msg->msg,
                        msg->msgLength);
@@ -183,7 +183,7 @@ static void set_shares_ui(ethQueryContractUI_t *msg,
     strlcpy(msg->title, "Shares:", msg->titleLength);
     amountToString(context->amount_sent,
                    sizeof(context->amount_sent),
-                   18,
+                   BIG_DECIMALS,
                    "Amount: ",
                    msg->msg,
                    msg->msgLength);
@@ -241,6 +241,9 @@ void handle_query_contract_ui(void *parameters) {
                 case SPOOL_V2_SWAP_AND_DEPOSIT:
                     set_vault_ui(msg, context);
                     break;
+                default:
+                    PRINTF("Unhandled selector index: %d\n", context->selectorIndex);
+                    break;
             }
             break;
         case 1:
@@ -262,6 +265,9 @@ void handle_query_contract_ui(void *parameters) {
                 case SPOOL_V2_DEPOSIT:
                     set_beneficiary_ui(msg, context);
                     break;
+                default:
+                    PRINTF("Unhandled selector index: %d\n", context->selectorIndex);
+                    break;
             }
             break;
         case 2:
@@ -270,6 +276,9 @@ void handle_query_contract_ui(void *parameters) {
                 case SPOOL_V2_EXTEND_REWARD:
                     set_vault_ui(msg, context);
                     break;
+                default:
+                    PRINTF("Unhandled selector index: %d\n", context->selectorIndex);
+                    break;
             }
             break;
         case 3:
@@ -277,6 +286,9 @@ void handle_query_contract_ui(void *parameters) {
                 case SPOOL_V2_ADD_TOKEN:
                 case SPOOL_V2_EXTEND_REWARD:
                     set_reward_end_time(msg, context);
+                    break;
+                default:
+                    PRINTF("Unhandled selector index: %d\n", context->selectorIndex);
                     break;
             }
             break;

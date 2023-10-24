@@ -41,6 +41,9 @@ void handle_finalize(void *parameters) {
             msg->numScreens = 4;
             msg->tokenLookup1 = context->token_address;
             break;
+        default:
+            PRINTF("Unhandled selector: %d", context->selectorIndex);
+            return;
     }
     msg->uiType = ETH_UI_TYPE_GENERIC;
     msg->result = ETH_PLUGIN_RESULT_OK;

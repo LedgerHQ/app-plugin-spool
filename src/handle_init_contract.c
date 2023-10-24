@@ -1,6 +1,10 @@
 #include "spool_plugin.h"
 
 static int find_selector(uint32_t selector, const uint32_t *selectors, size_t n, selector_t *out) {
+    if (out == NULL || selectors == NULL){
+        return -1;
+    }
+
     for (selector_t i = 0; i < n; i++) {
         if (selector == selectors[i]) {
             *out = i;

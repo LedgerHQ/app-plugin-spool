@@ -270,9 +270,6 @@ static void handle_swap_and_deposit(ethPluginProvideParameter_t *msg, spool_para
     }
 }
 
-static void handle_claim_reward(ethPluginProvideParameter_t *msg, spool_parameters_t *context) {
-}
-
 void handle_provide_parameter(void *parameters) {
     ethPluginProvideParameter_t *msg = (ethPluginProvideParameter_t *) parameters;
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
