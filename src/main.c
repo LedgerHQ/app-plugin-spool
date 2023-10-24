@@ -210,8 +210,6 @@ __attribute__((section(".boot"))) int main(int arg0) {
     // Try catch block. Please read the docs for more information on how to use those!
     BEGIN_TRY {
         TRY {
-            // Low-level black magic.
-            check_api_level(CX_COMPAT_APILEVEL);
             // Check if we are called from the dashboard.
             if (!arg0) {
                 // called from dashboard, launch Ethereum app

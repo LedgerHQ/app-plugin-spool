@@ -107,7 +107,7 @@ static void set_add_token_ui(ethQueryContractUI_t *msg,
         // Get the string representation of the address stored in `context->beneficiary`. Put it in
         // `msg->msg`.
         getEthAddressStringFromBinary(
-            context->token_address,
+            (uint8_t *) context->token_address,
             msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
             msg->pluginSharedRW->sha3,
             chainid);
