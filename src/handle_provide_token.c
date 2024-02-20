@@ -1,7 +1,6 @@
 #include "spool_plugin.h"
 
-void handle_provide_token(void *parameters) {
-    ethPluginProvideInfo_t *msg = (ethPluginProvideInfo_t *) parameters;
+void handle_provide_token(ethPluginProvideInfo_t *msg) {
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
     PRINTF("IN PROVIDE TOKEN: %d\n", msg->item1);
     if (msg->item1) {

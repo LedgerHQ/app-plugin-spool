@@ -1,7 +1,6 @@
 #include "spool_plugin.h"
 
-void handle_query_contract_id(void *parameters) {
-    ethQueryContractID_t *msg = (ethQueryContractID_t *) parameters;
+void handle_query_contract_id(ethQueryContractID_t *msg) {
     const spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
 
     strlcpy(msg->name, "Spool", msg->nameLength);
