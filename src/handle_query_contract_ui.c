@@ -110,7 +110,6 @@ static void set_add_token_ui(ethQueryContractUI_t *msg,
         getEthAddressStringFromBinary(
             (uint8_t *) context->token_address,
             msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-            msg->pluginSharedRW->sha3,
             chainid);
     }
 }
@@ -160,7 +159,6 @@ static void set_vault_ui(ethQueryContractUI_t *msg,
     getEthAddressStringFromBinary(
         (uint8_t *) context->vault_address,
         msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-        msg->pluginSharedRW->sha3,
         chainid);
 }
 
@@ -175,7 +173,6 @@ static void set_beneficiary_ui(ethQueryContractUI_t *msg,
     getEthAddressStringFromBinary(
         (uint8_t *) context->beneficiary,
         msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-        msg->pluginSharedRW->sha3,
         chainid);
 }
 
