@@ -20,20 +20,16 @@ const sim_options_nano = {
 
 const Resolve = require('path').resolve;
 
-const NANOS_ETH_PATH = Resolve('elfs/ethereum_nanos.elf');
 const NANOSP_ETH_PATH = Resolve('elfs/ethereum_nanosp.elf');
 const NANOX_ETH_PATH = Resolve('elfs/ethereum_nanox.elf');
 
-const NANOS_PLUGIN_PATH = Resolve('elfs/plugin_nanos.elf');
 const NANOSP_PLUGIN_PATH = Resolve('elfs/plugin_nanosp.elf');
 const NANOX_PLUGIN_PATH = Resolve('elfs/plugin_nanox.elf');
 
-const NANOS_PLUGIN = { Spool: NANOS_PLUGIN_PATH };
 const NANOX_PLUGIN = { Spool: NANOX_PLUGIN_PATH };
 const NANOSP_PLUGIN = { Spool: NANOSP_PLUGIN_PATH };
 
 const nano_models: DeviceModel[] = [
-  { name: 'nanos', letter: 'S', path: NANOS_PLUGIN_PATH, eth_path: NANOS_ETH_PATH },
   { name: 'nanosp', letter: 'SP', path: NANOSP_PLUGIN_PATH, eth_path: NANOSP_ETH_PATH },
   { name: 'nanox', letter: 'X', path: NANOX_PLUGIN_PATH, eth_path: NANOX_ETH_PATH }
 ];
@@ -91,8 +87,6 @@ function zemu(device, func, signed=false, testNetwork= "ethereum") {
     let plugin;
 
     if (device === "nanos") {
-      eth_path = NANOS_ETH_PATH;
-      plugin = NANOS_PLUGIN;
     } else if (device === "nanox") {
       eth_path = NANOX_ETH_PATH;
       plugin = NANOX_PLUGIN;
