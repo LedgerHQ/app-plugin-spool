@@ -1,4 +1,5 @@
 #include "spool_plugin.h"
+
 // Set UI for the "Send" screen.
 static void set_send_ui(ethQueryContractUI_t *msg, spool_parameters_t *context) {
     switch (context->selectorIndex) {
@@ -109,7 +110,6 @@ static void set_add_token_ui(ethQueryContractUI_t *msg,
         getEthAddressStringFromBinary(
             (uint8_t *) context->token_address,
             msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-            msg->pluginSharedRW->sha3,
             chainid);
     }
 }
@@ -159,7 +159,6 @@ static void set_vault_ui(ethQueryContractUI_t *msg,
     getEthAddressStringFromBinary(
         (uint8_t *) context->vault_address,
         msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-        msg->pluginSharedRW->sha3,
         chainid);
 }
 
@@ -174,7 +173,6 @@ static void set_beneficiary_ui(ethQueryContractUI_t *msg,
     getEthAddressStringFromBinary(
         (uint8_t *) context->beneficiary,
         msg->msg + 2,  // +2 here because we've already prefixed with '0x'.
-        msg->pluginSharedRW->sha3,
         chainid);
 }
 
@@ -189,8 +187,7 @@ static void set_shares_ui(ethQueryContractUI_t *msg,
                    msg->msgLength);
 }
 
-void handle_query_contract_ui(void *parameters) {
-    ethQueryContractUI_t *msg = (ethQueryContractUI_t *) parameters;
+void handle_query_contract_ui(ethQueryContractUI_t *msg) {
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
 
     memset(msg->title, 0, msg->titleLength);

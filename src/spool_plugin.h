@@ -1,8 +1,7 @@
 #pragma once
 
-#include "eth_internals.h"
-#include "eth_plugin_interface.h"
 #include <string.h>
+#include "eth_plugin_interface.h"
 
 #define PARAMETER_LENGTH 32
 #define SELECTOR_SIZE    4
@@ -89,13 +88,6 @@ typedef struct spool_parameters_t {
     selector_t selectorIndex;
 } spool_parameters_t;
 
-// Piece of code that will check that the above structure is not bigger than 5 * 32. Do not remove
-// this check.
-_Static_assert(sizeof(spool_parameters_t) <= 5 * 32, "Structure of parameters too big.");
-
-void handle_init_contract(void *parameters);
-void handle_provide_parameter(void *parameters);
-void handle_query_contract_ui(void *parameters);
-void handle_finalize(void *parameters);
-void handle_provide_token(void *parameters);
-void handle_query_contract_id(void *parameters);
+// Check that the plugin context structure will fit in the ethereum allocated memory.
+// Do not remove!
+ASSERT_SIZEOF_PLUGIN_CONTEXT(spool_parameters_t);

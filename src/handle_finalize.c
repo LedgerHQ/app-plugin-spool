@@ -1,7 +1,6 @@
 #include "spool_plugin.h"
 
-void handle_finalize(void *parameters) {
-    ethPluginFinalize_t *msg = (ethPluginFinalize_t *) parameters;
+void handle_finalize(ethPluginFinalize_t *msg) {
     spool_parameters_t *context = (spool_parameters_t *) msg->pluginContext;
     msg->tokenLookup1 = NULL;
     msg->tokenLookup2 = NULL;
